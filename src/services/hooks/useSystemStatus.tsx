@@ -65,8 +65,10 @@ function useSystemStatus() {
 }
 
 async function logs(key: string): Promise<ServiceStatus> {
-    const response = await fetch(`https://raw.githubusercontent.com/mehatab/fettle/main/public/status/${key}_report.log`);
+    // const response = await fetch(`https://raw.githubusercontent.com/mehatab/fettle/main/public/status/${key}_report.log`);
+    const response = await fetch(`https://raw.githubusercontent.com/DragonX-AI/DragonX-Status/main/public/status/${key}_report.log`);
     const text = await response.text();
+    console.log(text);
     const lines = text.split("\n");
     try {
         const line = lines[lines.length - 2];
