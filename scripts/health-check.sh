@@ -4,10 +4,8 @@ if [[ $origin == *statsig-io/statuspage* ]]
 then
   commit=false
 fi
-
 KEYSARRAY=()
 URLSARRAY=()
-
 urlsConfig="public/urls.cfg"
 echo "Reading $urlsConfig"
 while read -r line
@@ -17,18 +15,14 @@ do
   KEYSARRAY+=(${TOKENS[0]})
   URLSARRAY+=(${TOKENS[1]})
 done < "$urlsConfig"
-
 echo "***********************"
 echo "Starting health checks with ${#KEYSARRAY[@]} configs:"
-
 mkdir -p logs
-
 for (( index=0; index < ${#KEYSARRAY[@]}; index++))
 do
   key="${KEYSARRAY[index]}"
   url="${URLSARRAY[index]}"
   echo "  $key=$url"
-
   for i in 1 2 3; 
   do
     response=$(curl -o /dev/null -s -w '%{http_code} %{time_total}' --silent --output /dev/null $url)
@@ -54,11 +48,10 @@ do
     echo "    $dateTime, $result, $time_total"
   fi
 done
-
 if [[ $commit == true ]]
 then
-  git config --global user.name 'MarkCodering'
-  git config --global user.email 'mark.chen.sstm@gmail.com'
+  git config --global user.name 'fettle-mehatab'
+  git config --global user.email 'fettle.mehatab@gmail.com'
   git add -A --force public/status/
   git commit -am '[Automated] Update Health Check Logs'
   git push
