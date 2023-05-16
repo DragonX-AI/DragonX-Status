@@ -6,7 +6,7 @@ then
 fi
 KEYSARRAY=()
 URLSARRAY=()
-urlsConfig="public/urls.cfg"
+urlsConfig="public/urls.txt"
 echo "Reading $urlsConfig"
 while read -r line
 do
@@ -15,6 +15,7 @@ do
   KEYSARRAY+=(${TOKENS[0]})
   URLSARRAY+=(${TOKENS[1]})
 done < "$urlsConfig"
+
 echo "***********************"
 echo "Starting health checks with ${#KEYSARRAY[@]} configs:"
 mkdir -p logs
