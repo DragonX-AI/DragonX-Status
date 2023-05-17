@@ -1,0 +1,2 @@
+Frontend_Application=https://dragonnote.vercel.app/
+API_Server=https://dragonnote-web-container.azurewebsites.net
